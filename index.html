@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intuitive Work Listings Wireframe</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Intuitive Work Listings Wireframe (Bootstrap)</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     .annotation {
-      color: #666;
+      color: #6c757d;
       font-size: 0.75rem;
       font-style: italic;
       margin-top: 0.5rem;
-      border-left: 2px solid #ccc;
+      border-left: 2px solid #dee2e6;
       padding-left: 0.5rem;
     }
     .toast {
@@ -24,287 +26,354 @@
       opacity: 1;
       pointer-events: auto;
     }
+    .filter-chip {
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    @media (min-width: 992px) {
+      .sidebar {
+        border-right: 1px solid #dee2e6;
+      }
+    }
   </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-light">
   <!-- Main Container -->
-  <div class="max-w-md mx-auto bg-white min-h-screen">
+  <div class="container-fluid p-0">
     <!-- Header -->
-    <header class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-sm">
-      <div class="flex items-center space-x-2">
-        <span class="material-icons">movie</span>
-        <h1 class="text-lg font-bold">Freecomers</h1>
+    <header class="bg-primary text-white p-3 d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-camera-reels me-2"></i>
+        <h1 class="h5 mb-0">Freecomers</h1>
       </div>
-      <button class="material-icons text-white">account_circle</button>
-    </header>
-    <div class="annotation">
-      Header with app logo/icon and profile button for intuitive navigation.
-    </div>
-
-    <!-- Navigation Tabs -->
-    <nav class="flex border-b border-gray-200 bg-white">
-      <button class="flex-1 py-3 text-center bg-blue-100 text-blue-600 font-semibold border-b-2 border-blue-600">Work Listings</button>
-      <button class="flex-1 py-3 text-center text-gray-500">Projects</button>
-    </nav>
-    <div class="annotation">
-      Tabs with color accent on active tab to clearly distinguish Work Listings from Projects.
-    </div>
-
-    <!-- Create Listing Button -->
-    <div class="p-4">
-      <button class="w-full bg-blue-600 text-white py-3 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition">
-        <span class="material-icons">add</span>
-        <span>Create Work Listing</span>
+      <button class="btn btn-outline-light btn-sm">
+        <i class="bi bi-person-circle"></i>
       </button>
-    </div>
-    <div class="annotation">
-      Prominent button with icon and clear label to encourage quick posting, styled for thumb-friendly tapping.
-    </div>
+    </header>
+    <small class="annotation d-block px-3">
+      Header with logo/icon and profile button, responsive for mobile and desktop.
+    </small>
 
-    <!-- Filters Section -->
-    <div class="p-4 border-t border-gray-200 bg-gray-50">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-sm font-medium text-gray-700">Filter Listings</span>
-        <button class="text-blue-600 text-sm flex items-center space-x-1" id="openFilterModal">
-          <span class="material-icons text-sm">filter_list</span>
-          <span>Filters</span>
-        </button>
+    <!-- Main Content -->
+    <div class="row g-0">
+      <!-- Sidebar for Filters (Desktop) -->
+      <div class="col-lg-3 sidebar p-3 d-none d-lg-block">
+        <h6 class="fw-bold">Filters</h6>
+        <div class="mb-3">
+          <label for="locationFilterDesktop" class="form-label small">Location</label>
+          <select id="locationFilterDesktop" class="form-select form-select-sm">
+            <option>All Locations</option>
+            <option>Mumbai</option>
+            <option>Chandigarh</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="roleFilterDesktop" class="form-label small">Role</label>
+          <select id="roleFilterDesktop" class="form-select form-select-sm">
+            <option>All Roles</option>
+            <option>Editor</option>
+            <option>DOP</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="projectTypeFilterDesktop" class="form-label small">Project Type</label>
+          <select id="projectTypeFilterDesktop" class="form-select form-select-sm">
+            <option>All Types</option>
+            <option>Ad Film</option>
+            <option>Feature Film</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="dateFilterDesktop" class="form-label small">Shoot Date</label>
+          <select id="dateFilterDesktop" class="form-select form-select-sm">
+            <option>Any Date</option>
+            <option>Next 7 Days</option>
+            <option>Next 30 Days</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-sm w-100">Apply Filters</button>
       </div>
-      <div class="flex space-x-2 overflow-x-auto">
-        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Chandigarh</span>
-        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Editor</span>
-        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Ad Film</span>
-      </div>
-    </div>
-    <div class="annotation">
-      Tappable filter chips show active filters; 'Filters' button opens modal for quick, thumb-friendly selection.
-    </div>
+      <small class="annotation d-block px-3 d-lg-none">
+        Sidebar with filters for desktop, hidden on mobile for space efficiency.
+      </small>
 
-    <!-- Listings Feed -->
-    <div class="p-4 space-y-4">
-      <!-- Sample Listing Card -->
-      <div class="border rounded-lg p-4 bg-white shadow-sm relative">
-        <div class="flex items-center mb-2">
-          <div class="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
-          <div>
-            <h2 class="font-bold text-base">Need Line Producer</h2>
-            <p class="text-xs text-gray-500">Posted by Studio XYZ • 2h ago</p>
-          </div>
-        </div>
-        <div class="space-y-1 text-sm text-gray-600">
-          <p><span class="material-icons text-sm align-middle">location_on</span> Chandigarh</p>
-          <p><span class="material-icons text-sm align-middle">event</span> Shoot: 06/04/2025</p>
-          <p><span class="material-icons text-sm align-middle">schedule</span> Duration: 1 day</p>
-          <p><span class="material-icons text-sm align-middle">attach_money</span> Budget: As per profile</p>
-          <p><span class="material-icons text-sm align-middle">phone</span> WhatsApp: 7999026050</p>
-          <p><span class="material-icons text-sm align-middle">movie</span> Type: Ad Film</p>
-        </div>
-        <div class="flex justify-between mt-3">
-          <button class="text-blue-600 flex items-center space-x-1">
-            <span class="material-icons">bookmark_border</span>
-            <span class="text-sm">Save</span>
-          </button>
-          <button class="text-gray-500 flex items-center space-x-1">
-            <span class="material-icons">flag</span>
-            <span class="text-sm">Report</span>
-          </button>
-        </div>
-        <span class="absolute top-2 right-2 bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full">Urgent</span>
-      </div>
-      <!-- Second Sample Listing -->
-      <div class="border rounded-lg p-4 bg-white shadow-sm relative">
-        <div class="flex items-center mb-2">
-          <div class="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
-          <div>
-            <h2 class="font-bold text-base">Casting Call for Actors</h2>
-            <p class="text-xs text-gray-500">Posted by Creative Films • 1d ago</p>
-          </div>
-        </div>
-        <div class="space-y-1 text-sm text-gray-600">
-          <p><span class="material-icons text-sm align-middle">location_on</span> Mumbai</p>
-          <p><span class="material-icons text-sm align-middle">event</span> Shoot: 15/04/2025</p>
-          <p><span class="material-icons text-sm align-middle">schedule</span> Duration: 3 days</p>
-          <p><span class="material-icons text-sm align-middle">attach_money</span> Budget: ₹20,000</p>
-          <p><span class="material-icons text-sm align-middle">email</span> Email: casting@studio.com</p>
-          <p><span class="material-icons text-sm align-middle">movie</span> Type: Feature Film</p>
-        </div>
-        <div class="flex justify-between mt-3">
-          <button class="text-blue-600 flex items-center space-x-1">
-            <span class="material-icons">bookmark</span>
-            <span class="text-sm">Saved</span>
-          </button>
-          <button class="text-gray-500 flex items-center space-x-1">
-            <span class="material-icons">flag</span>
-            <span class="text-sm">Report</span>
+      <!-- Main Content Area -->
+      <div class="col-lg-9 p-3">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Work Listings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+        </ul>
+        <small class="annotation d-block">
+          Tabs separate Work Listings from Projects, with active state for clarity.
+        </small>
+
+        <!-- Create Listing Button -->
+        <div class="mb-3">
+          <button class="btn btn-primary w-100 d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#createListingModal">
+            <i class="bi bi-plus-circle me-2"></i> Create Work Listing
           </button>
         </div>
-      </div>
-    </div>
-    <div class="annotation">
-      Feed with avatar, poster info, and urgency tags for engagement. Icons and spacing improve readability. Swipeable actions could be added for Save/Report.
-    </div>
+        <small class="annotation d-block">
+          Thumb-friendly button with icon for quick access to form, full-width on mobile.
+        </small>
 
-    <!-- Filter Modal -->
-    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="filterModal">
-      <div class="bg-white p-4 m-4 rounded-lg max-w-md mx-auto">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg font-bold">Filters</h2>
-          <button id="closeFilterModal" class="material-icons text-gray-500">close</button>
-        </div>
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium">Location</label>
-            <select class="w-full border rounded-md p-2">
-              <option>All Locations</option>
-              <option>Mumbai</option>
-              <option>Chandigarh</option>
-            </select>
+        <!-- Filters Section (Mobile) -->
+        <div class="d-lg-none mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="small fw-medium">Filter Listings</span>
+            <button class="btn btn-link p-0 text-primary small" data-bs-toggle="modal" data-bs-target="#filterModal">
+              <i class="bi bi-funnel"></i> Filters
+            </button>
           </div>
-          <div>
-            <label class="block text-sm font-medium">Role</label>
-            <select class="w-full border rounded-md p-2">
-              <option>All Roles</option>
-              <option>Editor</option>
-              <option>DOP</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium">Project Type</label>
-            <select class="w-full border rounded-md p-2">
-              <option>All Types</option>
-              <option>Ad Film</option>
-              <option>Feature Film</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium">Shoot Date</label>
-            <select class="w-full border rounded-md p-2">
-              <option>Any Date</option>
-              <option>Next 7 Days</option>
-              <option>Next 30 Days</option>
-            </select>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-primary filter-chip">Chandigarh</span>
+            <span class="badge bg-primary filter-chip">Editor</span>
+            <span class="badge bg-primary filter-chip">Ad Film</span>
           </div>
         </div>
-        <div class="flex justify-end mt-4">
-          <button class="bg-blue-600 text-white py-2 px-4 rounded-md">Apply Filters</button>
-        </div>
-      </div>
-    </div>
-    <div class="annotation">
-      Filter modal for intuitive selection, with clear labels and 'Apply' button to confirm changes.
-    </div>
+        <small class="annotation d-block d-lg-none">
+          Filter chips show active filters on mobile; modal for filter selection.
+        </small>
 
-    <!-- Listing Creation Form (Modal) -->
-    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="createListingModal">
-      <div class="bg-white p-4 m-4 rounded-lg max-w-md mx-auto">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg font-bold">Create Work Listing</h2>
-          <button id="closeCreateModal" class="material-icons text-gray-500">close</button>
-        </div>
-        <form id="listingForm">
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium">Title *</label>
-              <input type="text" placeholder="e.g., Need Editor for Feature Film" class="w-full border rounded-md p-2" required>
+        <!-- Listings Feed -->
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+          <!-- Sample Listing Card -->
+          <div class="col">
+            <div class="card h-100 position-relative">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="bg-secondary rounded-circle me-2" style="width: 32px; height: 32px;"></div>
+                  <div>
+                    <h5 class="card-title mb-0">Need Line Producer</h5>
+                    <small class="text-muted">Studio XYZ • 2h ago</small>
+                  </div>
+                </div>
+                <ul class="list-unstyled small text-muted mb-3">
+                  <li><i class="bi bi-geo-alt me-1"></i> Chandigarh</li>
+                  <li><i class="bi bi-calendar me-1"></i> Shoot: 06/04/2025</li>
+                  <li><i class="bi bi-clock me-1"></i> Duration: 1 day</li>
+                  <li><i class="bi bi-currency-rupee me-1"></i> Budget: As per profile</li>
+                  <li><i class="bi bi-whatsapp me-1"></i> WhatsApp: 7999026050</li>
+                  <li><i class="bi bi-film me-1"></i> Type: Ad Film</li>
+                </ul>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-link p-0 text-primary bookmark-btn">
+                    <i class="bi bi-bookmark"></i> Save
+                  </button>
+                  <button class="btn btn-link p-0 text-muted">
+                    <i class="bi bi-flag"></i> Report
+                  </button>
+                </div>
+                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Urgent</span>
+              </div>
             </div>
-            <div>
-              <label class="block text-sm font-medium">Role *</label>
-              <select class="w-full border rounded-md p-2" required>
-                <option value="">Select Role</option>
+          </div>
+          <!-- Second Sample Listing -->
+          <div class="col">
+            <div class="card h-100 position-relative">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="bg-secondary rounded-circle me-2" style="width: 32px; height: 32px;"></div>
+                  <div>
+                    <h5 class="card-title mb-0">Casting Call for Actors</h5>
+                    <small class="text-muted">Creative Films • 1d ago</small>
+                  </div>
+                </div>
+                <ul class="list-unstyled small text-muted mb-3">
+                  <li><i class="bi bi-geo-alt me-1"></i> Mumbai</li>
+                  <li><i class="bi bi-calendar me-1"></i> Shoot: 15/04/2025</li>
+                  <li><i class="bi bi-clock me-1"></i> Duration: 3 days</li>
+                  <li><i class="bi bi-currency-rupee me-1"></i> Budget: ₹20,000</li>
+                  <li><i class="bi bi-envelope me-1"></i> Email: casting@studio.com</li>
+                  <li><i class="bi bi-film me-1"></i> Type: Feature Film</li>
+                </ul>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-link p-0 text-primary bookmark-btn">
+                    <i class="bi bi-bookmark-fill"></i> Saved
+                  </button>
+                  <button class="btn btn-link p-0 text-muted">
+                    <i class="bi bi-flag"></i> Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <small class="annotation d-block mt-3">
+          Responsive feed with cards (1 column on mobile, 2 on desktop). Avatars, icons, and urgency tags enhance engagement.
+        </small>
+      </div>
+    </div>
+
+    <!-- Filter Modal (Mobile) -->
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="filterModalLabel">Filters</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="locationFilter" class="form-label">Location</label>
+              <select id="locationFilter" class="form-select">
+                <option>All Locations</option>
+                <option>Mumbai</option>
+                <option>Chandigarh</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="roleFilter" class="form-label">Role</label>
+              <select id="roleFilter" class="form-select">
+                <option>All Roles</option>
                 <option>Editor</option>
                 <option>DOP</option>
               </select>
             </div>
-            <div>
-              <label class="block text-sm font-medium">Project Type *</label>
-              <select class="w-full border rounded-md p-2" required>
-                <option value="">Select Type</option>
+            <div class="mb-3">
+              <label for="projectTypeFilter" class="form-label">Project Type</label>
+              <select id="projectTypeFilter" class="form-select">
+                <option>All Types</option>
                 <option>Ad Film</option>
                 <option>Feature Film</option>
               </select>
             </div>
-            <div>
-              <label class="block text-sm font-medium">Location *</label>
-              <input type="text" placeholder="e.g., Chandigarh" class="w-full border rounded-md p-2" required>
-            </div>
-            <div>
-              <label class="block text-sm font-medium">Shoot Date *</label>
-              <input type="date" class="w-full border rounded-md p-2" required>
-            </div>
-            <div>
-              <label class="block text-sm font-medium">Duration</label>
-              <input type="text" placeholder="e.g., 1 day" class="w-full border rounded-md p-2">
-            </div>
-            <div>
-              <label class="block text-sm font-medium">Budget</label>
-              <input type="text" placeholder="e.g., As per profile or ₹10,000" class="w-full border rounded-md p-2">
-            </div>
-            <div>
-              <label class="block text-sm font-medium">Contact Method *</label>
-              <input type="text" placeholder="e.g., WhatsApp 7999026050" class="w-full border rounded-md p-2" required>
-            </div>
-            <div class="text-sm text-gray-500">
-              <button type="button" class="text-blue-600">+ Add Optional Fields</button>
+            <div class="mb-3">
+              <label for="dateFilter" class="form-label">Shoot Date</label>
+              <select id="dateFilter" class="form-select">
+                <option>Any Date</option>
+                <option>Next 7 Days</option>
+                <option>Next 30 Days</option>
+              </select>
             </div>
           </div>
-          <div class="flex justify-end space-x-2 mt-4">
-            <button type="button" class="bg-gray-300 text-black py-2 px-4 rounded-md">Cancel</button>
-            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md">Post Listing</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Apply Filters</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-    <div class="annotation">
-      Streamlined form with required fields marked, optional fields collapsible, and real-time validation (simulated). Toast notification on submission.
+    <small class="annotation d-block px-3 d-lg-none">
+      Mobile filter modal with clear inputs, centered for thumb-friendly access.
+    </small>
+
+    <!-- Create Listing Modal -->
+    <div class="modal fade" id="createListingModal" tabindex="-1" aria-labelledby="createListingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createListingModalLabel">Create Work Listing</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="listingForm">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="title" class="form-label">Title *</label>
+                <input type="text" class="form-control" id="title" placeholder="e.g., Need Editor for Feature Film" required>
+              </div>
+              <div class="mb-3">
+                <label for="role" class="form-label">Role *</label>
+                <select id="role" class="form-select" required>
+                  <option value="">Select Role</option>
+                  <option>Editor</option>
+                  <option>DOP</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="projectType" class="form-label">Project Type *</label>
+                <select id="projectType" class="form-select" required>
+                  <option value="">Select Type</option>
+                  <option>Ad Film</option>
+                  <option>Feature Film</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="location" class="form-label">Location *</label>
+                <input type="text" class="form-control" id="location" placeholder="e.g., Chandigarh" required>
+              </div>
+              <div class="mb-3">
+                <label for="shootDate" class="form-label">Shoot Date *</label>
+                <input type="date" class="form-control" id="shootDate" required>
+              </div>
+              <div class="mb-3 collapse" id="optionalFields">
+                <label for="duration" class="form-label">Duration</label>
+                <input type="text" class="form-control" id="duration" placeholder="e.g., 1 day">
+              </div>
+              <div class="mb-3 collapse" id="optionalFields">
+                <label for="budget" class="form-label">Budget</label>
+                <input type="text" class="form-control" id="budget" placeholder="e.g., As per profile or ₹10,000">
+              </div>
+              <div class="mb-3">
+                <label for="contact" class="form-label">Contact Method *</label>
+                <input type="text" class="form-control" id="contact" placeholder="e.g., WhatsApp 7999026050" required>
+              </div>
+              <button type="button" class="btn btn-link p-0 text-primary small" data-bs-toggle="collapse" data-bs-target="#optionalFields">
+                <i class="bi bi-plus-circle me-1"></i> Add Optional Fields
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Post Listing</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+    <small class="annotation d-block px-3">
+      Streamlined form with collapsible optional fields and validation, centered modal for accessibility.
+    </small>
 
     <!-- Toast Notification -->
-    <div class="fixed bottom-4 left-4 right-4 bg-green-600 text-white p-3 rounded-lg text-sm toast" id="toast">
-      Listing posted successfully!
+    <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 start-50 translate-middle-x mb-3" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Listing posted successfully!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
     </div>
-    <div class="annotation">
-      Toast notification for feedback on actions like posting or bookmarking, inspired by Material-UI snackbar.
-    </div>
+    <small class="annotation d-block px-3">
+      Bootstrap toast for feedback on actions, centered at bottom for visibility.
+    </small>
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Demo interactivity
-    const createBtn = document.querySelector('.bg-blue-600.text-white.flex');
-    const createModal = document.getElementById('createListingModal');
-    const closeCreateModal = document.getElementById('closeCreateModal');
-    const filterBtn = document.getElementById('openFilterModal');
-    const filterModal = document.getElementById('filterModal');
-    const closeFilterModal = document.getElementById('closeFilterModal');
     const form = document.getElementById('listingForm');
-    const toast = document.getElementById('toast');
-
-    createBtn.addEventListener('click', () => createModal.classList.toggle('hidden'));
-    closeCreateModal.addEventListener('click', () => createModal.classList.add('hidden'));
-    filterBtn.addEventListener('click', () => filterModal.classList.toggle('hidden'));
-    closeFilterModal.addEventListener('click', () => filterModal.classList.add('hidden'));
+    const toastEl = document.getElementById('toast');
+    const toast = new bootstrap.Toast(toastEl);
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      createModal.classList.add('hidden');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2000);
+      const modal = bootstrap.Modal.getInstance(document.getElementById('createListingModal'));
+      modal.hide();
+      toastEl.querySelector('.toast-body').textContent = 'Listing posted successfully!';
+      toast.show();
     });
 
-    // Simulate swipe action (for demo, click toggles bookmark state)
-    document.querySelectorAll('.text-blue-600.flex').forEach(btn => {
+    document.querySelectorAll('.bookmark-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const icon = btn.querySelector('.material-icons');
-        const text = btn.querySelector('.text-sm');
-        if (icon.textContent === 'bookmark_border') {
-          icon.textContent = 'bookmark';
-          text.textContent = 'Saved';
-          toast.textContent = 'Listing saved!';
-          toast.classList.add('show');
-          setTimeout(() => toast.classList.remove('show'), 2000);
+        const icon = btn.querySelector('i');
+        const text = btn.textContent.trim();
+        if (text === 'Save') {
+          icon.classList.replace('bi-bookmark', 'bi-bookmark-fill');
+          btn.innerHTML = '<i class="bi bi-bookmark-fill"></i> Saved';
+          toastEl.querySelector('.toast-body').textContent = 'Listing saved!';
         } else {
-          icon.textContent = 'bookmark_border';
-          text.textContent = 'Save';
+          icon.classList.replace('bi-bookmark-fill', 'bi-bookmark');
+          btn.innerHTML = '<i class="bi bi-bookmark"></i> Save';
+          toastEl.querySelector('.toast-body').textContent = 'Listing unsaved!';
         }
+        toast.show();
       });
     });
   </script>
+</body>
+</html>
