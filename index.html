@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work Listings Wireframe</title>
+  <title>Intuitive Work Listings Wireframe</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Custom styles for wireframe annotations */
     .annotation {
       color: #666;
       font-size: 0.75rem;
@@ -15,146 +15,239 @@
       border-left: 2px solid #ccc;
       padding-left: 0.5rem;
     }
+    .toast {
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
   </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-50 font-sans">
   <!-- Main Container -->
   <div class="max-w-md mx-auto bg-white min-h-screen">
     <!-- Header -->
-    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
-      <h1 class="text-lg font-bold">Freecomers</h1>
-      <button class="text-sm">Profile</button>
+    <header class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-sm">
+      <div class="flex items-center space-x-2">
+        <span class="material-icons">movie</span>
+        <h1 class="text-lg font-bold">Freecomers</h1>
+      </div>
+      <button class="material-icons text-white">account_circle</button>
     </header>
+    <div class="annotation">
+      Header with app logo/icon and profile button for intuitive navigation.
+    </div>
 
     <!-- Navigation Tabs -->
-    <nav class="flex border-b border-gray-200">
-      <button class="flex-1 py-2 text-center bg-gray-100 font-semibold">Work Listings</button>
-      <button class="flex-1 py-2 text-center text-gray-500">Projects</button>
+    <nav class="flex border-b border-gray-200 bg-white">
+      <button class="flex-1 py-3 text-center bg-blue-100 text-blue-600 font-semibold border-b-2 border-blue-600">Work Listings</button>
+      <button class="flex-1 py-3 text-center text-gray-500">Projects</button>
     </nav>
     <div class="annotation">
-      Navigation tabs separate Work Listings from Projects, as per PRD, to avoid confusion.
+      Tabs with color accent on active tab to clearly distinguish Work Listings from Projects.
     </div>
 
     <!-- Create Listing Button -->
     <div class="p-4">
-      <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
-        + Create New Listing
+      <button class="w-full bg-blue-600 text-white py-3 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition">
+        <span class="material-icons">add</span>
+        <span>Create Work Listing</span>
       </button>
     </div>
     <div class="annotation">
-      Prominent button to access the listing creation form, encouraging quick posting.
+      Prominent button with icon and clear label to encourage quick posting, styled for thumb-friendly tapping.
     </div>
 
     <!-- Filters Section -->
-    <div class="p-4 border-t border-gray-200">
+    <div class="p-4 border-t border-gray-200 bg-gray-50">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-sm font-medium text-gray-700">Filter Listings</span>
+        <button class="text-blue-600 text-sm flex items-center space-x-1" id="openFilterModal">
+          <span class="material-icons text-sm">filter_list</span>
+          <span>Filters</span>
+        </button>
+      </div>
       <div class="flex space-x-2 overflow-x-auto">
-        <select class="border rounded-md p-2 text-sm">
-          <option>Location</option>
-          <option>Mumbai</option>
-          <option>Chandigarh</option>
-        </select>
-        <select class="border rounded-md p-2 text-sm">
-          <option>Role</option>
-          <option>Editor</option>
-          <option>DOP</option>
-        </select>
-        <select class="border rounded-md p-2 text-sm">
-          <option>Project Type</option>
-          <option>Ad Film</option>
-          <option>Feature Film</option>
-        </select>
-        <select class="border rounded-md p-2 text-sm">
-          <option>Date</option>
-          <option>Next 7 Days</option>
-          <option>Next 30 Days</option>
-        </select>
+        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Chandigarh</span>
+        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Editor</span>
+        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Ad Film</span>
       </div>
     </div>
     <div class="annotation">
-      Filter dropdowns for Location, Role, Project Type, and Date, as per PRD. Horizontal scroll for mobile.
+      Tappable filter chips show active filters; 'Filters' button opens modal for quick, thumb-friendly selection.
     </div>
 
     <!-- Listings Feed -->
     <div class="p-4 space-y-4">
       <!-- Sample Listing Card -->
-      <div class="border rounded-md p-4 bg-white shadow-sm">
-        <h2 class="font-bold text-lg">Need Line Producer</h2>
-        <p class="text-sm text-gray-600">📍 Chandigarh</p>
-        <p class="text-sm text-gray-600">📅 Shoot Date: 06/04/2025</p>
-        <p class="text-sm text-gray-600">🕒 Duration: 1 day</p>
-        <p class="text-sm text-gray-600">💰 Budget: As per profile</p>
-        <p class="text-sm text-gray-600">📩 Contact: WhatsApp 7999026050</p>
-        <p class="text-sm text-gray-600">📌 Type: Ad Film</p>
-        <div class="flex justify-between mt-2">
-          <button class="text-blue-600 text-sm">Bookmark</button>
-          <button class="text-red-600 text-sm">Report</button>
+      <div class="border rounded-lg p-4 bg-white shadow-sm relative">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+          <div>
+            <h2 class="font-bold text-base">Need Line Producer</h2>
+            <p class="text-xs text-gray-500">Posted by Studio XYZ • 2h ago</p>
+          </div>
         </div>
+        <div class="space-y-1 text-sm text-gray-600">
+          <p><span class="material-icons text-sm align-middle">location_on</span> Chandigarh</p>
+          <p><span class="material-icons text-sm align-middle">event</span> Shoot: 06/04/2025</p>
+          <p><span class="material-icons text-sm align-middle">schedule</span> Duration: 1 day</p>
+          <p><span class="material-icons text-sm align-middle">attach_money</span> Budget: As per profile</p>
+          <p><span class="material-icons text-sm align-middle">phone</span> WhatsApp: 7999026050</p>
+          <p><span class="material-icons text-sm align-middle">movie</span> Type: Ad Film</p>
+        </div>
+        <div class="flex justify-between mt-3">
+          <button class="text-blue-600 flex items-center space-x-1">
+            <span class="material-icons">bookmark_border</span>
+            <span class="text-sm">Save</span>
+          </button>
+          <button class="text-gray-500 flex items-center space-x-1">
+            <span class="material-icons">flag</span>
+            <span class="text-sm">Report</span>
+          </button>
+        </div>
+        <span class="absolute top-2 right-2 bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full">Urgent</span>
       </div>
       <!-- Second Sample Listing -->
-      <div class="border rounded-md p-4 bg-white shadow-sm">
-        <h2 class="font-bold text-lg">Casting Call for Actors</h2>
-        <p class="text-sm text-gray-600">📍 Mumbai</p>
-        <p class="text-sm text-gray-600">📅 Shoot Date: 15/04/2025</p>
-        <p class="text-sm text-gray-600">🕒 Duration: 3 days</p>
-        <p class="text-sm text-gray-600">💰 Budget: ₹20,000</p>
-        <p class="text-sm text-gray-600">📩 Contact: Email casting@studio.com</p>
-        <p class="text-sm text-gray-600">📌 Type: Feature Film</p>
-        <div class="flex justify-between mt-2">
-          <button class="text-blue-600 text-sm">Bookmark</button>
-          <button class="text-red-600 text-sm">Report</button>
+      <div class="border rounded-lg p-4 bg-white shadow-sm relative">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+          <div>
+            <h2 class="font-bold text-base">Casting Call for Actors</h2>
+            <p class="text-xs text-gray-500">Posted by Creative Films • 1d ago</p>
+          </div>
+        </div>
+        <div class="space-y-1 text-sm text-gray-600">
+          <p><span class="material-icons text-sm align-middle">location_on</span> Mumbai</p>
+          <p><span class="material-icons text-sm align-middle">event</span> Shoot: 15/04/2025</p>
+          <p><span class="material-icons text-sm align-middle">schedule</span> Duration: 3 days</p>
+          <p><span class="material-icons text-sm align-middle">attach_money</span> Budget: ₹20,000</p>
+          <p><span class="material-icons text-sm align-middle">email</span> Email: casting@studio.com</p>
+          <p><span class="material-icons text-sm align-middle">movie</span> Type: Feature Film</p>
+        </div>
+        <div class="flex justify-between mt-3">
+          <button class="text-blue-600 flex items-center space-x-1">
+            <span class="material-icons">bookmark</span>
+            <span class="text-sm">Saved</span>
+          </button>
+          <button class="text-gray-500 flex items-center space-x-1">
+            <span class="material-icons">flag</span>
+            <span class="text-sm">Report</span>
+          </button>
         </div>
       </div>
     </div>
     <div class="annotation">
-      Listings feed in reverse-chronological order, with WhatsApp-inspired card format. Includes Bookmark and Report buttons.
+      Feed with avatar, poster info, and urgency tags for engagement. Icons and spacing improve readability. Swipeable actions could be added for Save/Report.
     </div>
 
-    <!-- Listing Creation Form (Modal) -->
-    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="createListingModal">
-      <div class="bg-white p-4 m-4 rounded-md max-w-md mx-auto">
-        <h2 class="text-lg font-bold mb-4">Create Work Listing</h2>
-        <form>
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Title</label>
-            <input type="text" placeholder="e.g., Need Editor for Feature Film" class="w-full border rounded-md p-2">
+    <!-- Filter Modal -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="filterModal">
+      <div class="bg-white p-4 m-4 rounded-lg max-w-md mx-auto">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-bold">Filters</h2>
+          <button id="closeFilterModal" class="material-icons text-gray-500">close</button>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium">Location</label>
+            <select class="w-full border rounded-md p-2">
+              <option>All Locations</option>
+              <option>Mumbai</option>
+              <option>Chandigarh</option>
+            </select>
           </div>
-          <div class="mb-4">
+          <div>
             <label class="block text-sm font-medium">Role</label>
             <select class="w-full border rounded-md p-2">
-              <option>Select Role</option>
+              <option>All Roles</option>
               <option>Editor</option>
               <option>DOP</option>
             </select>
           </div>
-          <div class="mb-4">
+          <div>
             <label class="block text-sm font-medium">Project Type</label>
             <select class="w-full border rounded-md p-2">
-              <option>Select Type</option>
+              <option>All Types</option>
               <option>Ad Film</option>
               <option>Feature Film</option>
             </select>
           </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Location</label>
-            <input type="text" placeholder="e.g., Chandigarh" class="w-full border rounded-md p-2">
-          </div>
-          <div class="mb-4">
+          <div>
             <label class="block text-sm font-medium">Shoot Date</label>
-            <input type="date" class="w-full border rounded-md p-2">
+            <select class="w-full border rounded-md p-2">
+              <option>Any Date</option>
+              <option>Next 7 Days</option>
+              <option>Next 30 Days</option>
+            </select>
           </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Duration</label>
-            <input type="text" placeholder="e.g., 1 day" class="w-full border rounded-md p-2">
+        </div>
+        <div class="flex justify-end mt-4">
+          <button class="bg-blue-600 text-white py-2 px-4 rounded-md">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      Filter modal for intuitive selection, with clear labels and 'Apply' button to confirm changes.
+    </div>
+
+    <!-- Listing Creation Form (Modal) -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="createListingModal">
+      <div class="bg-white p-4 m-4 rounded-lg max-w-md mx-auto">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-bold">Create Work Listing</h2>
+          <button id="closeCreateModal" class="material-icons text-gray-500">close</button>
+        </div>
+        <form id="listingForm">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium">Title *</label>
+              <input type="text" placeholder="e.g., Need Editor for Feature Film" class="w-full border rounded-md p-2" required>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Role *</label>
+              <select class="w-full border rounded-md p-2" required>
+                <option value="">Select Role</option>
+                <option>Editor</option>
+                <option>DOP</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Project Type *</label>
+              <select class="w-full border rounded-md p-2" required>
+                <option value="">Select Type</option>
+                <option>Ad Film</option>
+                <option>Feature Film</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Location *</label>
+              <input type="text" placeholder="e.g., Chandigarh" class="w-full border rounded-md p-2" required>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Shoot Date *</label>
+              <input type="date" class="w-full border rounded-md p-2" required>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Duration</label>
+              <input type="text" placeholder="e.g., 1 day" class="w-full border rounded-md p-2">
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Budget</label>
+              <input type="text" placeholder="e.g., As per profile or ₹10,000" class="w-full border rounded-md p-2">
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Contact Method *</label>
+              <input type="text" placeholder="e.g., WhatsApp 7999026050" class="w-full border rounded-md p-2" required>
+            </div>
+            <div class="text-sm text-gray-500">
+              <button type="button" class="text-blue-600">+ Add Optional Fields</button>
+            </div>
           </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Budget</label>
-            <input type="text" placeholder="e.g., As per profile" class="w-full border rounded-md p-2">
-          </div>
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Contact Method</label>
-            <input type="text" placeholder="e.g., WhatsApp 7999026050" class="w-full border rounded-md p-2">
-          </div>
-          <div class="flex justify-end space-x-2">
+          <div class="flex justify-end space-x-2 mt-4">
             <button type="button" class="bg-gray-300 text-black py-2 px-4 rounded-md">Cancel</button>
             <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md">Post Listing</button>
           </div>
@@ -162,18 +255,56 @@
       </div>
     </div>
     <div class="annotation">
-      Modal form for creating listings, with all required fields from PRD. Opens when "Create New Listing" is clicked.
+      Streamlined form with required fields marked, optional fields collapsible, and real-time validation (simulated). Toast notification on submission.
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="fixed bottom-4 left-4 right-4 bg-green-600 text-white p-3 rounded-lg text-sm toast" id="toast">
+      Listing posted successfully!
+    </div>
+    <div class="annotation">
+      Toast notification for feedback on actions like posting or bookmarking, inspired by Material-UI snackbar.
     </div>
   </div>
 
   <script>
-    // Basic interactivity for demo (modal toggle)
-    document.querySelector('.bg-blue-600').addEventListener('click', () => {
-      document.getElementById('createListingModal').classList.toggle('hidden');
+    // Demo interactivity
+    const createBtn = document.querySelector('.bg-blue-600.text-white.flex');
+    const createModal = document.getElementById('createListingModal');
+    const closeCreateModal = document.getElementById('closeCreateModal');
+    const filterBtn = document.getElementById('openFilterModal');
+    const filterModal = document.getElementById('filterModal');
+    const closeFilterModal = document.getElementById('closeFilterModal');
+    const form = document.getElementById('listingForm');
+    const toast = document.getElementById('toast');
+
+    createBtn.addEventListener('click', () => createModal.classList.toggle('hidden'));
+    closeCreateModal.addEventListener('click', () => createModal.classList.add('hidden'));
+    filterBtn.addEventListener('click', () => filterModal.classList.toggle('hidden'));
+    closeFilterModal.addEventListener('click', () => filterModal.classList.add('hidden'));
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      createModal.classList.add('hidden');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
     });
-    document.querySelector('.bg-gray-300').addEventListener('click', () => {
-      document.getElementById('createListingModal').classList.add('hidden');
+
+    // Simulate swipe action (for demo, click toggles bookmark state)
+    document.querySelectorAll('.text-blue-600.flex').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const icon = btn.querySelector('.material-icons');
+        const text = btn.querySelector('.text-sm');
+        if (icon.textContent === 'bookmark_border') {
+          icon.textContent = 'bookmark';
+          text.textContent = 'Saved';
+          toast.textContent = 'Listing saved!';
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2000);
+        } else {
+          icon.textContent = 'bookmark_border';
+          text.textContent = 'Save';
+        }
+      });
     });
   </script>
-</body>
-</html>
